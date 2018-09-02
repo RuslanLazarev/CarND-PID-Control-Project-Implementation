@@ -42,10 +42,14 @@ public:
   */
   double TotalError();
 
+  double PID::ComputeSteer();
+  double PID::ComputeThrottle(double throttleMax)
+
+
   /*
   * Twiddle algorithm as per lesson by Sebastian Thrun
   */
-  void Twiddle(coudle cte);
+  void Twiddle(double cte);
 };
 
 #endif /* PID_H */

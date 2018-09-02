@@ -43,5 +43,4 @@ double PID::ComputeThrottle(double throttleMax) {
     return throttleMax -Kp*p_error - Ki*i_error - Kd*d_error;
 }
 
-}
 
