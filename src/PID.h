@@ -41,6 +41,11 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  /*
+  * Twiddle algorithm as per lesson by Sebastian Thrun
+  */
+  void Twiddle(coudle cte);
 };
 
 #endif /* PID_H */

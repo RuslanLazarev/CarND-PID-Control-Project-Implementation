@@ -32,14 +32,13 @@ int main()
 {
   uWS::Hub h;
 
-  PID pid;
+  PID pidSteer;
+  PID pidThrottle
   // TODO: Initialize the pid variable.
-  double init_Kp = -1.0;
-  double init_Ki = 0;
-  double init_Kd = 0;
-  pid.init(init_Kp, init_Ki, init_Kd);
+  pidSteer.init(0.2, 0.004, 3); // Initial values from the Udacity leson
+  pidThrottle.init(0.1, 0.01, 0.1); // Initial values for Twiddle
 
-  h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
+  h.onMessage([&pidSteer, &pidThrottle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
@@ -55,14 +54,19 @@ int main()
           double speed = std::stod(j[1]["speed"].get<std::string>());
           double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
+          double throttle_value = 0.5;
+          double throttleMax = 1;
           /*
           * TODO: Calcuate steering value here, remember the steering value is
           * [-1, 1].
           * NOTE: Feel free to play around with the throttle and speed. Maybe use
           * another PID controller to control the speed!
           */
-          pid.UpdateError(cte);
-          steer_value = Kp*p_error + Ki*i_error + Kd*d_error;
+          pidSteer.UpdateError(cte);
+          steer_value = pidSteer.ComputeSteer;
+
+          pidThrottle.UpdateError(fabs(steer_value))
+          throttle_value = pidThrottle.Computethrottle(throttleMax);
 
           
           // DEBUG
@@ -70,7 +74,7 @@ int main()
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
+          msgJson["throttle"] = throttle_value;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
