@@ -11,9 +11,9 @@ PID::PID() {}
 PID::~PID() {}
 
 void PID::Init(double Kp, double Ki, double Kd) {
-    this -> double Kp;
-    this -> double Ki;
-    this -> double Kd;
+    this->double Kp;
+    this->double Ki;
+    this->double Kd;
 
     p_error = 0.0;
     i_error = 0.0;

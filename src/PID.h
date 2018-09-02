@@ -42,8 +42,8 @@ public:
   */
   double TotalError();
 
-  double PID::ComputeSteer();
-  double PID::ComputeThrottle(double throttleMax)
+  double ComputeSteer();
+  double ComputeThrottle(double throttleMax);
 
 
   /*
