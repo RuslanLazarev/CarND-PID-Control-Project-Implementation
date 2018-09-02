@@ -36,7 +36,7 @@ int main()
   PID pidThrottle;
   // TODO: Initialize the pid variable.
   pidSteer.Init(0.2, 0.004, 3); // Initial values from the Udacity leson
-  pidThrottle.Init(0.1, 0.01, 0.1); // Initial values for Twiddle
+  pidThrottle.Init(0.4, 0.001, 0.6); // Initial values for Twiddle
 
   h.onMessage([&pidSteer, &pidThrottle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
