@@ -33,10 +33,10 @@ int main()
   uWS::Hub h;
 
   PID pidSteer;
-  PID pidThrottle
+  PID pidThrottle;
   // TODO: Initialize the pid variable.
-  pidSteer.init(0.2, 0.004, 3); // Initial values from the Udacity leson
-  pidThrottle.init(0.1, 0.01, 0.1); // Initial values for Twiddle
+  pidSteer.Init(0.2, 0.004, 3); // Initial values from the Udacity leson
+  pidThrottle.Init(0.1, 0.01, 0.1); // Initial values for Twiddle
 
   h.onMessage([&pidSteer, &pidThrottle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -63,9 +63,9 @@ int main()
           * another PID controller to control the speed!
           */
           pidSteer.UpdateError(cte);
-          steer_value = pidSteer.ComputeSteer;
+          steer_value = pidSteer.ComputeSteer();
 
-          pidThrottle.UpdateError(fabs(steer_value))
+          pidThrottle.UpdateError(fabs(steer_value));
           throttle_value = pidThrottle.Computethrottle(throttleMax);
 
           
