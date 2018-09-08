@@ -22,8 +22,8 @@ public:
   /*
   * Coefficients for Twiddle
   */ 
-  std::vector<double> dp[3];
-  std::vector<double> p[3];
+  std::vector<double> dp;
+  std::vector<double> p;
   double total_err;
   double best_err;
   int iter;
