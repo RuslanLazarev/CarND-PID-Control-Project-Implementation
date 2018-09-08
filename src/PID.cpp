@@ -46,7 +46,7 @@ double PID::TotalError() {
 
 vector<double> PID::Twiddle(double cte) {
     best_err = total_err;
-    float sum_dp = accumulate(dp.begin(), dp.end(), 0)
+    float sum_dp = accumulate(dp.begin(), dp.end(), 0);
     while(sum_dp > 0.2) {
         for (int i = 0, i < p.size(), i++) {
             p[i] += dp[i];
@@ -70,7 +70,7 @@ vector<double> PID::Twiddle(double cte) {
             }
             
         }
-        
+        sum_dp = accumulate(dp.begin(), dp.end(), 0);        
     } 
 
     return p;
