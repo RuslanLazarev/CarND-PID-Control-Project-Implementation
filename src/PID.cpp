@@ -26,10 +26,8 @@ void PID::Init(double Kp, double Ki, double Kd) {
     best_err = 0.0;
     total_err = 0.0;
 
-    vector<double> p[3];
-    vector<double> dp[3];
-    p << Kp, Ki, Kd;
-    dp << 0.2, 0.5, 0,2;
+    vector<double> p = {Kp, Ki, Kd};
+    vector<double> dp = {0.2, 0.5, 0,2};
     
 }
 
