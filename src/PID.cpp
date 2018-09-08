@@ -1,6 +1,7 @@
 #include "PID.h"
 
 using namespace std;
+#include <vector>
 
 /*
 * TODO: Complete the PID class.
@@ -23,8 +24,8 @@ void PID::Init(double Kp, double Ki, double Kd) {
     best_err = 0.0;
     total_err = 0.0;
 
-    std::vector<double> p[3];
-    std::vector<double> dp[3];
+    vector<double> p[3];
+    vector<double> dp[3];
     p << Kp, Ki, Kd;
     dp << 0.2, 0.5, 0,2;
     
@@ -43,7 +44,7 @@ double PID::TotalError() {
     return Kp*p_error + Ki*i_error + Kd*d_error;
 }
 
-std::vector<double> PID::Twiddle(double cte) {
+vector<double> PID::Twiddle(double cte) {
     best_err = total_err;
     sum_dp = accumulate(dp.begin(), dp.end(),0)
     while sum_dp > 0.2 {

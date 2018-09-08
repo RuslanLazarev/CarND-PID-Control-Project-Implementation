@@ -1,6 +1,8 @@
 #ifndef PID_H
 #define PID_H
 
+#include <vector>
+
 class PID {
 public:
   /*
@@ -20,8 +22,8 @@ public:
   /*
   * Coefficients for Twiddle
   */ 
-  std::vector<double> dp[3];
-  std::vector<double> p[3];
+  vector<double> dp[3];
+  vector<double> p[3];
   double total_err;
   double best_err;
   int iter;
