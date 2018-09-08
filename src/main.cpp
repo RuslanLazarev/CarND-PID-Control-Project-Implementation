@@ -35,8 +35,8 @@ int main()
   PID pidSteer;
   PID pidThrottle;
   // TODO: Initialize the pid variable.
-  pidSteer.Init(0.2, 0.004, 3); // Initial values from the Udacity leson
-  pidThrottle.Init(0.4, 0.001, 0.6); // Initial values for Twiddle
+  pidSteer.Init(0.07, 0.0018, 2.3); // Initial values from the Udacity leson
+  pidThrottle.Init(0.4, 0.001, 0.55); // Initial values for Twiddle
 
   h.onMessage([&pidSteer, &pidThrottle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -54,8 +54,8 @@ int main()
           double speed = std::stod(j[1]["speed"].get<std::string>());
           double angle = std::stod(j[1]["steering_angle"].get<std::string>());
           double steer_value;
-          double throttle_value = 0.5;
-          double throttleMax = 1;
+          double throttle_value = 0.35;
+          double throttleMax = 0.7; //reduce max possible throttle
           /*
           * TODO: Calcuate steering value here, remember the steering value is
           * [-1, 1].
