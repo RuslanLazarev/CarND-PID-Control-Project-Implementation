@@ -65,6 +65,8 @@ int main()
           pidSteer.UpdateError(cte);
           steer_value = pidSteer.ComputeSteer();
 
+          
+
           pidThrottle.UpdateError(fabs(steer_value));
           throttle_value = pidThrottle.ComputeThrottle(throttleMax);
 

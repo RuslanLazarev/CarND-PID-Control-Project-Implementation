@@ -18,6 +18,15 @@ public:
   double Kd;
 
   /*
+  * Coefficients for Twiddle
+  */ 
+  std::vector<double> dp[3];
+  std::vector<double> p[3];
+  double total_err;
+  double best_err;
+  int iter;
+
+  /*
   * Constructor
   */
   PID();
@@ -49,7 +58,7 @@ public:
   /*
   * Twiddle algorithm as per lesson by Sebastian Thrun
   */
-  void Twiddle(double cte);
+  std::vector<double> Twiddle(double cte);
 };
 
 #endif /* PID_H */
