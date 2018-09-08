@@ -48,16 +48,16 @@ vector<double> PID::Twiddle(double cte) {
     best_err = total_err;
     float sum_dp = accumulate(dp.begin(), dp.end(), 0);
     while(sum_dp > 0.2) {
-        for (int i = 0, i < p.size(), i++) {
+        for (int i = 0; i < p.size(); i++) {
             p[i] += dp[i];
-            total_err = TotalError(cte);
+            total_err = TotalError();
 
             if (total_err < best_err) {
                 best_err = total_err;
                 dp[i] *= 1.1;
             } else {
                 p[i] -= 2 * dp[i];
-                total_err = TotalError(cte);
+                total_err = TotalError();
 
                 if (total_err < best_err) {
                     best_err = total_err;
