@@ -1,7 +1,9 @@
 #include "PID.h"
+#include <vector>
+#include <numeric>
 
 using namespace std;
-#include <vector>
+
 
 /*
 * TODO: Complete the PID class.
