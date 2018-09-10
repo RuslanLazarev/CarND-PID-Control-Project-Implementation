@@ -43,7 +43,7 @@ double PID::UpdateWithTwiddle(double cte) {
     i_error += cte;
 
     if (iter < 200) {
-        total_err = TotalError(cte);
+        total_err += cte*cte;
         Twiddle();
     }
     iter += 1;
