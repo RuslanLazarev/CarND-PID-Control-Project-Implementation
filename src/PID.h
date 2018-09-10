@@ -53,7 +53,7 @@ public:
   */
   double TotalError();
 
-  double ComputeSteer();
+  double ComputeSteer(double cte);
   double ComputeThrottle(double throttleMax);
 
 
