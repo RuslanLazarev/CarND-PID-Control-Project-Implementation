@@ -37,18 +37,18 @@ void PID::UpdateError(double cte) {
     i_error += cte;
 }
 
-void PID::UpdateWithTwiddle(double cte) {
+double PID::UpdateWithTwiddle(double cte) {
     d_error = cte - p_error;
     p_error = cte;
     i_error += cte;
-    double corr_coef = - p[0] * cte - p[1] * i_error - p[2] * (cte - d_error)
 
     if (iter < 200) {
-        TotalError(cte);
+        total_err = TotalError(cte);
         Twiddle();
     }
     iter += 1;
 
+    return - p[0] * cte - p[1] * i_error - p[2] * (cte - d_error);
 }
 
 
@@ -56,7 +56,7 @@ double PID::TotalError() {
     return Kp*p_error + Ki*i_error + Kd*d_error;
 }
 
-double PID::Twiddle() {
+void  PID::Twiddle() {
     best_err = total_err;
     float sum_dp = accumulate(dp.begin(), dp.end(), 0);
     while(sum_dp > 0.2) {
@@ -80,8 +80,6 @@ double PID::Twiddle() {
         }
         sum_dp = accumulate(dp.begin(), dp.end(), 0);        
     } 
-
-    return p;
 }
 
 double PID::ComputeSteer() {

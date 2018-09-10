@@ -47,20 +47,20 @@ public:
   * Update the PID error variables given cross track error.
   */
   void UpdateError(double cte);
-  void PID::UpdateWithTwiddle(double cte)
+  double UpdateWithTwiddle(double cte);
   /*
   * Calculate the total PID error.
   */
   double TotalError();
 
-  double ComputeSteer(double cte);
+  double ComputeSteer();
   double ComputeThrottle(double throttleMax);
 
 
   /*
   * Twiddle algorithm as per lesson by Sebastian Thrun
   */
-  double Twiddle();
+  void Twiddle();
 };
 
 #endif /* PID_H */
