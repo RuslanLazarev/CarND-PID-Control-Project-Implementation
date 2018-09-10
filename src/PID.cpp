@@ -79,8 +79,8 @@ vector<double> PID::Twiddle(double cte) {
 double PID::ComputeSteer() {
     //return -Kp*p_error - Ki*i_error - Kd*d_error;
     // In case of using twiddle:
-    std::vector<double> pSteer = pidSteer.Twiddle(double cte)
-    return -pSteer[0] * p_error - pSteer[1] * d_error - pSteer[2] * i_error
+    std::vector<double> pSteer = Twiddle(double cte);
+    return -pSteer[0] * p_error - pSteer[1] * d_error - pSteer[2] * i_error;
 }
 
 double PID::ComputeThrottle(double throttleMax) {
