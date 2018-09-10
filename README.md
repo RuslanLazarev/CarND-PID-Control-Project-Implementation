@@ -3,11 +3,16 @@
 ## PID Controller Project
 ---
 
-The goal of the project is to implement PID controller in C++ and test/tune it using a simulator. General idea behind PID control is based on three terms (as per (https://en.wikipedia.org/wiki/PID_controller):
-* Proportional Controller: 
-* Integral term:
-* Differential term:
+The goal of the project is to implement PID controller in C++ and test/tune it using a simulator. General idea behind PID control is based on three terms (as per https://en.wikipedia.org/wiki/PID_controller):
+* Proportional Controller: the motor current is set in proportion to the existing error.
+* Integral term: increases action in relation not only to the error but also the time for which it has persisted.
+* Derivative term: do not consider the error, but the rate of change of error, trying to bring this rate to zero. 
 
+### Parameter Tuning
+For the parameter tuning I have written Twiddle algorithm (https://www.youtube.com/watch?v=2uQ2BSzDvXs) yet its usage was limited due to coupling to the simulator. I have proceed tuning through trial and error in the following order:
+* The proportional component has a strong effect on the output. its value was set to low, 0.07. High value can lead to overshoot and oscillations.
+* The integral component sums errors over time. It reduces oscillations around the target value, but can introduce instability at the beginning when set too high. It has been choosen at 0.001.
+* The derivative component calculates the future error based on the previous error and brings it into feedback system. It smooths effect from the proportional term. This term was set at 1.2 for steering, and 2.1 for throttle.
 
 
 ## Dependencies
