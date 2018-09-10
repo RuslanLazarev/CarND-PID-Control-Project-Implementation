@@ -66,12 +66,12 @@ int main()
           steer_value = pidSteer.ComputeSteer();
 
           // If the steering angle is beyond +/- 1 limit the steering angle
-          // to +/- 0.5 to prevent sharp turns
+          // to +/- 0.8 to prevent sharp turns
           if(steer_value < -1) {
-            steer_value = -0.5;
+            steer_value = -0.8;
           }
           else if(steer_value > 1) {
-            steer_value = 0.5;
+            steer_value = 0.8;
           }
           
 

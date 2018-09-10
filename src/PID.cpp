@@ -35,9 +35,6 @@ void PID::UpdateError(double cte) {
     d_error = cte - p_error;
     p_error = cte;
     i_error += cte;
-
-    //twiddleCorrect = (-p[0] * cte) + (-p[1] * i_error) + (-p[2] * (cte - d_error));
-    
 }
 
 void PID::UpdateWithTwiddle(double cte) {
