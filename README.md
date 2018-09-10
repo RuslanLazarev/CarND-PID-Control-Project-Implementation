@@ -10,9 +10,9 @@ The goal of the project is to implement PID controller in C++ and test/tune it u
 
 ### Parameter Tuning
 For the parameter tuning I have written Twiddle algorithm (https://www.youtube.com/watch?v=2uQ2BSzDvXs) yet its usage was limited due to coupling to the simulator. I have proceed tuning through trial and error in the following order:
-* The proportional component has a strong effect on the output. its value was set to low, 0.07. High value can lead to overshoot and oscillations.
+* The proportional component has a strong effect on the output. its value was set to low, 0.07 (0.3 for throttle). High value can lead to overshoot and oscillations.
 * The integral component sums errors over time. It reduces oscillations around the target value, but can introduce instability at the beginning when set too high. It has been choosen at 0.001.
-* The derivative component calculates the future error based on the previous error and brings it into feedback system. It smooths effect from the proportional term. This term was set at 1.2 for steering, and 2.1 for throttle.
+* The derivative component calculates the future error based on the previous error and brings it into feedback system. It smooths effect from the proportional term. This term was set at 2.3 for steering, and 0.55 for throttle.
 
 
 ## Dependencies
