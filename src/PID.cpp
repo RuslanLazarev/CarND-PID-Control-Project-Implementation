@@ -40,25 +40,36 @@ void PID::UpdateError(double cte) {
     
 }
 
+void PID::UpdateWithTwiddle(double cte) {
+    d_error = cte - p_error;
+    p_error = cte;
+    i_error += cte;
+    double corr_coef = - p[0] * cte - p[1] * i_error - p[2] * (cte - d_error)
+
+    if (iter < 200) {
+        TotalError(cte);
+        Twiddle();
+    }
+    iter += 1;
+
+}
+
+
 double PID::TotalError() {
     return Kp*p_error + Ki*i_error + Kd*d_error;
 }
 
-vector<double> PID::Twiddle(double cte) {
+double PID::Twiddle() {
     best_err = total_err;
     float sum_dp = accumulate(dp.begin(), dp.end(), 0);
     while(sum_dp > 0.2) {
         for (unsigned int i = 0; i < p.size(); i++) {
             p[i] += dp[i];
-            total_err = TotalError();
-
             if (total_err < best_err) {
                 best_err = total_err;
                 dp[i] *= 1.1;
             } else {
                 p[i] -= 2 * dp[i];
-                total_err = TotalError();
-
                 if (total_err < best_err) {
                     best_err = total_err;
                     dp[i] *= 1.1;
@@ -76,11 +87,8 @@ vector<double> PID::Twiddle(double cte) {
     return p;
 }
 
-double PID::ComputeSteer(double cte) {
-    //return -Kp*p_error - Ki*i_error - Kd*d_error;
-    // In case of using twiddle:
-    std::vector<double> pSteer = Twiddle(cte);
-    return -pSteer[0] * p_error - pSteer[1] * d_error - pSteer[2] * i_error;
+double PID::ComputeSteer() {
+    return -Kp*p_error - Ki*i_error - Kd*d_error;
 }
 
 double PID::ComputeThrottle(double throttleMax) {
