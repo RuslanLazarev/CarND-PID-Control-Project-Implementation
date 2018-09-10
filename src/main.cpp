@@ -63,7 +63,7 @@ int main()
           * another PID controller to control the speed!
           */
           pidSteer.UpdateError(cte);
-          steer_value = pidSteer.ComputeSteer();
+          steer_value = pidSteer.ComputeSteer(cte);
 
           
 

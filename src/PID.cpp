@@ -76,7 +76,7 @@ vector<double> PID::Twiddle(double cte) {
     return p;
 }
 
-double PID::ComputeSteer() {
+double PID::ComputeSteer(double cte) {
     //return -Kp*p_error - Ki*i_error - Kd*d_error;
     // In case of using twiddle:
     std::vector<double> pSteer = Twiddle(cte);
